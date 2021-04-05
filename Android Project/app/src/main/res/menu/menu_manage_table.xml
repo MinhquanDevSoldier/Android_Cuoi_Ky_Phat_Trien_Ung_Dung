@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:title="Quản lý khu vực" android:id="@+id/menu_ql_khuvuc"/>
+    <item android:id="@+id/menu_them_ban" android:title="Thêm bàn"/>
+    <item android:title="Trở lại" android:id="@+id/menu_tro_lai_managetable"/>
+</menu>

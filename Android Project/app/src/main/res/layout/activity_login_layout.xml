@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sign in with your Account"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="40dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginRight="10dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="#e0e0e0"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:paddingTop="20dp"
+            android:paddingBottom="100dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:src="@drawable/pngwing" />
+
+            <EditText
+                android:id="@+id/EditText_TenTK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edt_dang_nhap"
+                android:drawableLeft="@drawable/icon_account"
+                android:hint="Tên tài khoản"
+                android:text="Minhquan123"
+                android:textSize="25sp" />
+
+            <EditText
+                android:id="@+id/EditText_MatKhau"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/edt_dang_nhap"
+                android:drawableLeft="@drawable/icon_password"
+                android:hint="Mật khẩu"
+                android:text="140320"
+                android:textSize="25sp" />
+
+            <Switch
+                android:id="@+id/Switch_Hienthi_MatKhau"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:shadowColor="@color/black"
+                android:text="Hiện mật khẩu"
+                android:textSize="25sp" />
+
+            <Button
+                android:id="@+id/button_DangNhap"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/btn_dang_nhap"
+                android:padding="15dp"
+                android:text="Đăng nhập"
+
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:weightSum="10"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".layout_activity.account_preview">
+    <TextView
+        android:layout_weight="1"
+        android:textSize="30sp"
+        android:text="Thông tin cá nhân"
+        android:textStyle="bold"
+        android:background="#0091f0"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Họ và tên :"
+                android:textSize="28sp"
+                android:textStyle="italic|bold" />
+
+            <EditText
+                android:id="@+id/edttennv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:gravity="center"
+                android:text=""
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="28sp"
+                android:textStyle="italic" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow>
+
+                    <TextView
+                        android:text="Chức vụ :"
+                        android:textSize="28sp"
+                        android:textStyle="italic|bold" />
+
+                    <EditText
+                        android:id="@+id/edtchucvu"
+                        android:enabled="false"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="28sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="SDT :"
+                        android:textSize="28sp"
+                        android:textStyle="italic|bold" />
+
+                    <EditText
+                        android:id="@+id/edtsodienthoai"
+                        android:enabled="false"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="28sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="CMND :"
+                        android:textSize="28sp"
+                        android:textStyle="italic|bold" />
+
+                    <EditText
+                        android:id="@+id/edtcmndnv"
+                        android:enabled="false"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="28sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="Ngày sinh :"
+                        android:textSize="28sp"
+                        android:textStyle="italic|bold" />
+
+                    <EditText
+                        android:id="@+id/edtngaysinhnv"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="28sp" />
+                </TableRow>
+
+                <TableRow>
+
+                    <TextView
+                        android:text="Mức Lương:"
+                        android:textSize="28sp"
+                        android:textStyle="italic|bold" />
+
+                    <EditText
+                        android:id="@+id/edtmucluongnv"
+                        android:layout_height="wrap_content"
+                        android:enabled="false"
+                        android:paddingLeft="20dp"
+                        android:text=""
+                        android:textColor="@color/black"
+                        android:textSize="28sp" />
+                </TableRow>
+            </TableLayout>
+            <Button
+                android:id="@+id/btnCapNhatTT"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/btn_dang_nhap"
+                android:text="Sửa thông tin"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <Button
+                android:id="@+id/btnXacNhanCapNhatTT"
+                android:enabled="false"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/btn_dang_nhap_2"
+                android:text="Cập nhập"
+                android:textSize="20sp"
+                android:textColor="#000000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

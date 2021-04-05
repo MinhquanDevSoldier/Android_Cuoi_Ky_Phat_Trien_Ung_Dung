@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/menukhuvucvaban" android:enabled="true"
+        android:title="Khu vực và Bàn">
+    </item>
+    <item android:title="Thực phẩm" android:id="@+id/menuthucpham"/>
+    <item android:title="Hóa đơn" android:id="@+id/menuhoadon"/>
+    <item android:title="Tài khoản" android:id="@+id/menutaikhoan"/>
+    <item android:id="@+id/menudangnhap" android:title="Đăng xuất"/>
+</menu>
