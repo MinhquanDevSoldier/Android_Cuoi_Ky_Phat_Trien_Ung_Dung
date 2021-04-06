@@ -116,7 +116,7 @@ public class activity_login_layout extends AppCompatActivity {
     }
 
     private void khoi_Tao_DatabaseTaiKhoan() {
-        listTK = databaseQuanOc.layDanhSachTaiKhoan();
+        listTK = databaseQuanOc.layDanhSachTaiKhoan("true");
     }
 
     public void Anhxa()

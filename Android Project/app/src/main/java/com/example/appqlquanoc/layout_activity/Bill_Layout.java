@@ -35,7 +35,10 @@ import com.example.appqlquanoc.doituong.SanPham;
 import com.google.android.material.tabs.TabLayout;
 
 import java.sql.BatchUpdateException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.crypto.AEADBadTagException;
 
@@ -94,6 +97,7 @@ public class Bill_Layout extends AppCompatActivity {
         {
             idhd= db.getidhoadon(banan.getIdBan());
             danhsachCTHD.addAll(db.layThongTinHoaDon(idhd));
+            TongTien();
         }
         else
         {
@@ -106,6 +110,7 @@ public class Bill_Layout extends AppCompatActivity {
         //load CTHD
         adapterOrder = new ListViewOrder_Custom_Adapter(getApplicationContext(),R.layout.listvieworder_row_custom,danhsachCTHD,danhsachSP);
         lvThongTinHoaDon.setAdapter(adapterOrder);
+
         registerForContextMenu(lvThongTinHoaDon);
 //        lvThongTinHoaDon.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
 //            @Override
@@ -133,6 +138,63 @@ public class Bill_Layout extends AppCompatActivity {
                         {
                             db.themCTHD(danhsachCTHD.get(i));
                         }
+                        String TimeIn ="";
+//                        Date now = Calendar.getInstance().getTime();
+//                        TimeIn = now.toString();
+                        final Calendar calendar = Calendar.getInstance();
+                        int ngay,thang,nam,gio,phut,giay;
+                        ngay = calendar.get(Calendar.DATE);
+                        thang = calendar.get(Calendar.MONTH);
+                        nam = calendar.get(Calendar.YEAR);
+                        gio = calendar.get(Calendar.HOUR_OF_DAY);
+                        phut = calendar.get(Calendar.MINUTE);
+                        giay = calendar.get(Calendar.MILLISECOND);
+                        String date,times;
+                        if(ngay < 10)
+                        {
+                            if(thang < 10)
+                            {
+                                date = "0"+ngay+"/0"+thang+"/"+nam;
+                            }
+                            else
+                            {
+                                date = "0"+ngay+"/"+thang+"/"+nam;
+                            }
+                        }
+                        else
+                        {
+                            if(thang < 10)
+                            {
+                                date = ngay+"/0"+thang+"/"+nam;
+                            }
+                            {
+                                date = ngay+"/"+thang+"/"+nam;
+                            }
+                        }
+                        if(gio < 10)
+                        {
+                            if(phut < 10)
+                            {
+                                times = "0"+gio+":0"+phut+":"+giay;
+                            }
+                            else
+                            {
+                                times = "0"+gio+":"+phut+":"+giay;
+                            }
+                        }
+                        else
+                        {
+                            if(phut < 10)
+                            {
+                                times = gio+":0"+phut+":"+giay;
+                            }
+                            else
+                            {
+                                times = gio+":"+phut+":"+giay;
+                            }
+                        }
+                        TimeIn = date+" "+times;
+                        db.ExcuteQuery("UPDATE HOADON_TABLE SET TGVAO = '"+TimeIn+"' WHERE IDHD_PK ="+idhd);
                         db.ExcuteQuery("UPDATE BANAN_TABLE SET TRANGTHAIBAN = 1 WHERE IDBAN_PK ="+banan.getIdBan());
                         Intent intent = new Intent();
                         setResult(RESULT_CODE_SAVE_BILL,intent);
@@ -142,7 +204,29 @@ public class Bill_Layout extends AppCompatActivity {
                 }
                 else if(trangthai == 1)
                 {
-                    Toast.makeText(Bill_Layout.this, "Hóa đơn đã cập nhật", Toast.LENGTH_SHORT).show();
+                    ArrayList<CTHD> CTHDgetFromData = new ArrayList<>();
+                    CTHDgetFromData.addAll(db.layThongTinHoaDon(idhd));
+
+                    for(int i = 0;i < danhsachCTHD.size();i++ )
+                    {
+                        if(KiemTraTrungMonDATA(danhsachCTHD.get(i).getIdsanpham(),idhd))
+                        {
+                            for(int j =0 ;j < CTHDgetFromData.size();j++)
+                            {
+                                if(danhsachCTHD.get(i).getIdsanpham() == CTHDgetFromData.get(j).getIdsanpham())
+                                {
+                                    int soluongmoi = danhsachCTHD.get(i).getSoluong();
+                                    db.ExcuteQuery("UPDATE CTHOADON_TABLE SET SOLUONG = "+soluongmoi+" WHERE IDHD_FK = "+idhd+" AND IDSP_FK ="+danhsachCTHD.get(i).getIdsanpham());
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            db.themCTHD(danhsachCTHD.get(i));
+                        }
+                    }
+                    Toast.makeText(Bill_Layout.this, "Hóa đơn đã cập nhật" + idhd, Toast.LENGTH_SHORT).show();
                     finish();
                 }
 
@@ -154,10 +238,69 @@ public class Bill_Layout extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 idhd = db.getidhoadon(banan.getIdBan());
+
                 if(banan.isTrangthai())
                 {
-                    db.ExcuteQuery("UPDATE BANAN_TABLE SET TRANGTHAIBAN = 0 WHERE IDBAN_PK ="+banan.getIdBan());
+                    String TimeOut ="";
+//                        Date now = Calendar.getInstance().getTime();
+//                        TimeIn = now.toString();
+                    final Calendar calendar = Calendar.getInstance();
+                    int ngay,thang,nam,gio,phut,giay;
+                    ngay = calendar.get(Calendar.DATE);
+                    thang = calendar.get(Calendar.MONTH);
+                    nam = calendar.get(Calendar.YEAR);
+                    gio = calendar.get(Calendar.HOUR_OF_DAY);
+                    phut = calendar.get(Calendar.MINUTE);
+                    giay = calendar.get(Calendar.MILLISECOND);
+                    String date,times;
+                    if(ngay < 10)
+                    {
+                        if(thang < 10)
+                        {
+                            date = "0"+ngay+"/0"+thang+"/"+nam;
+                        }
+                        else
+                        {
+                            date = "0"+ngay+"/"+thang+"/"+nam;
+                        }
+                    }
+                    else
+                    {
+                        if(thang < 10)
+                        {
+                            date = ngay+"/0"+thang+"/"+nam;
+                        }
+                        {
+                            date = ngay+"/"+thang+"/"+nam;
+                        }
+                    }
+                    if(gio < 10)
+                    {
+                        if(phut < 10)
+                        {
+                            times = "0"+gio+":0"+phut+":"+giay;
+                        }
+                        else
+                        {
+                            times = "0"+gio+":"+phut+":"+giay;
+                        }
+                    }
+                    else
+                    {
+                        if(phut < 10)
+                        {
+                            times = gio+":0"+phut+":"+giay;
+                        }
+                        else
+                        {
+                            times = gio+":"+phut+":"+giay;
+                        }
+                    }
+                    TimeOut = date+" "+times;
+                    db.ExcuteQuery("UPDATE HOADON_TABLE SET TIENTHANHTOAN = "+tvTongTien.getText().toString()+" WHERE IDHD_PK ="+idhd);
+                    db.ExcuteQuery("UPDATE HOADON_TABLE SET TGRA ='"+TimeOut+"' WHERE IDHD_PK ="+idhd);
                     db.ExcuteQuery("UPDATE HOADON_TABLE SET TRANGTHAITHANHTOAN = 1 WHERE IDHD_PK ="+idhd);
+                    db.ExcuteQuery("UPDATE BANAN_TABLE SET TRANGTHAIBAN = 0 WHERE IDBAN_PK ="+banan.getIdBan());
                     setResult(RESULT_CODE_PAY_THE_BILL,intent);
                     Toast.makeText(Bill_Layout.this, "Đã Thanh Toán "+tenBan, Toast.LENGTH_SHORT).show();
                     finish();
@@ -178,12 +321,15 @@ public class Bill_Layout extends AppCompatActivity {
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
+        idhd = db.getidhoadon(banan.getIdBan());
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         if(item.getItemId() == R.id.menu_xoathongtin)
         {
+            int idsp;
+            idsp = danhsachCTHD.get(info.position).getIdsanpham();
             Toast.makeText(this, info.position+"", Toast.LENGTH_SHORT).show();
             danhsachCTHD.remove(info.position);
-            db.ExcuteQuery("DELETE FROM CTHOADON_TABLE WHERE IDHD_FK = 8 AND IDSP_FK = 11");
+            db.ExcuteQuery("DELETE FROM CTHOADON_TABLE WHERE IDHD_FK = "+idhd+" AND IDSP_FK ="+idsp);
             adapterOrder.notifyDataSetChanged();
         }
         return super.onContextItemSelected(item);
@@ -203,6 +349,7 @@ public class Bill_Layout extends AppCompatActivity {
             case R.id.menuCancelBill:
                 if(banan.isTrangthai())
                 {
+
                     Toast.makeText(this, "Đã hủy", Toast.LENGTH_SHORT).show();
                 }
                 else
@@ -307,10 +454,27 @@ public class Bill_Layout extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         idhd = db.getidhoadon(banan.getIdBan());
+
                         int soluong = Integer.parseInt(edtNumber.getText().toString());
                         if(soluong > 0 && soluong <= 99)
                         {
-                            danhsachCTHD.add(new CTHD(-1,idhd,listSP.get(position).getIdMon(),soluong));
+                            //kiem tra xem mon co chua
+                            if(KiemTraTrungMon(listSP.get(position).getIdMon(),idhd) == true)
+                            {
+                                for(int i = 0; i< danhsachCTHD.size();i++)
+                                {
+                                    if(listSP.get(position).getIdMon() == danhsachCTHD.get(i).getIdsanpham())
+                                    {
+                                        soluong += danhsachCTHD.get(i).getSoluong();
+                                        danhsachCTHD.set(i,new CTHD(-1,idhd,listSP.get(position).getIdMon(),soluong));
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                danhsachCTHD.add(new CTHD(-1,idhd,listSP.get(position).getIdMon(),soluong));
+                            }
                             Toast.makeText(Bill_Layout.this, "Đã thêm", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
                         }
@@ -333,9 +497,17 @@ public class Bill_Layout extends AppCompatActivity {
         btndong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TongTien();
                 adapterOrder.notifyDataSetChanged();
                 Toast.makeText(Bill_Layout.this, "Đóng thêm món", Toast.LENGTH_SHORT).show();
                 dialogThemMon.dismiss();
+//                try {
+                    TongTien();
+//                }
+//                catch (Exception ex)
+//                {
+//                    Toast.makeText(Bill_Layout.this, ex+"", Toast.LENGTH_SHORT).show();
+//                }
             }
         });
         //
@@ -343,6 +515,7 @@ public class Bill_Layout extends AppCompatActivity {
             @Override
             public void onCancel(DialogInterface dialog) {
                 adapterOrder.notifyDataSetChanged();
+                TongTien();
                 Toast.makeText(Bill_Layout.this, "Đóng thêm món", Toast.LENGTH_SHORT).show();
             }
         });
@@ -360,6 +533,32 @@ public class Bill_Layout extends AppCompatActivity {
         db = new DatabaseQuanOc(getApplicationContext());
 
     }
+    //Hàm kiểm tra trùng lặp món trong listorder
+    public boolean KiemTraTrungMon(int idsp,int idhd)
+    {
+        for(int i = 0; i< danhsachCTHD.size();i++)
+        {
+            if(idsp == danhsachCTHD.get(i).getIdsanpham())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean KiemTraTrungMonDATA(int idsp,int idhd)
+    {
+        ArrayList<CTHD> CTHDgetFromData = new ArrayList<>();
+        CTHDgetFromData.addAll(db.layThongTinHoaDon(idhd));
+        for(int i = 0; i< CTHDgetFromData.size();i++)
+        {
+            if(idsp == CTHDgetFromData.get(i).getIdsanpham())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     //Hàm lấy dữ liệu tương ứng với bàn
     public void layThongTinHoaDon()
     {
@@ -375,5 +574,15 @@ public class Bill_Layout extends AppCompatActivity {
     {
         adapterOrder.notifyDataSetChanged();
     }
+    public void TongTien()
+    {
+        int tongtien = 0;
+        for(int i = 0 ;i < danhsachCTHD.size();i++)
+        {
+            tongtien+=danhsachCTHD.get(i).getSoluong()*db.getGiaMon(danhsachCTHD.get(i).getIdsanpham());
+        }
+        tvTongTien.setText(tongtien+"");
+    }
+
 
 }

@@ -225,11 +225,20 @@ public class DatabaseQuanOc extends SQLiteOpenHelper {
         db.close();
         return listtaikhoan;
     }
-     public ArrayList<Taikhoan> layDanhSachTaiKhoan()
+     public ArrayList<Taikhoan> layDanhSachTaiKhoan(String idcv)
      {
          ArrayList<Taikhoan> listtaikhoan = new ArrayList<>();
          SQLiteDatabase db = this.getReadableDatabase();
-         String sql = "SELECT * FROM "+TAIKHOAN_TABLE;
+         String sql;
+         if(idcv.equals("true"))
+         {
+             sql = "SELECT * FROM "+TAIKHOAN_TABLE;
+         }
+         else
+         {
+             sql = "SELECT * FROM "+TAIKHOAN_TABLE+" WHERE LOAITK ="+idcv;
+         }
+
          Cursor cursor = db.rawQuery(sql,null);
          if(cursor.moveToFirst())
          {
@@ -414,12 +423,23 @@ public class DatabaseQuanOc extends SQLiteOpenHelper {
         return listBanAn;
     }
     //Xu ly San Pham
+    public int getGiaMon(int idsp)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM MONAN_TABLE WHERE IDSP_PK = "+idsp,null);
+        if(cursor.moveToFirst())
+        {
+            return cursor.getInt(3);
+        }
+        return 0;
+    }
+
     public boolean themSanPham(SanPham sanPham)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_IDDM,sanPham.getMaDM());
-        cv.put(COLUMN_TENSP,sanPham.getTenMon());
+        cv.put(COLUMN_TENSP,sanPham.getTenMon().toString());
         cv.put(COLUMN_GIASP,sanPham.getGiaMon());
         long insert = db.insert(SANPHAM_TABLE,null,cv);
         if(insert == -1)
@@ -502,6 +522,52 @@ public class DatabaseQuanOc extends SQLiteOpenHelper {
             return false;
         }
         return true;
+    }
+    public ArrayList<Hoadon> DanhSachHoaDonDaThanhToan()
+    {
+        int idhd,idban,tienthanhtoan;
+        String tgvao,tgra,idtk;
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Hoadon> arrayListHoaDon = new ArrayList<>();
+        String query = "SELECT * FROM "+HOADON_TABLE+" WHERE "+COLUMN_TRANGTHAITHANHTOAN+"="+1;
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst())
+        {
+            do{
+                idhd = cursor.getInt(0);
+                idtk = cursor.getString(1);
+                idban = cursor.getInt(2);
+                tgvao = cursor.getString(3);
+                tgra = cursor.getString(4);
+                tienthanhtoan = cursor.getInt(5);
+                arrayListHoaDon.add(new Hoadon(idhd,idtk,idban,tgvao,tgra,tienthanhtoan,true));
+            }while (cursor.moveToNext());
+        }
+
+        return  arrayListHoaDon;
+    }
+    public ArrayList<Hoadon> DanhSachHoaDonTime(String timein,String timeout)
+    {
+        int idhd,idban,tienthanhtoan;
+        String tgvao,tgra,idtk;
+        SQLiteDatabase db = this.getReadableDatabase();
+        ArrayList<Hoadon> arrayListHoaDon = new ArrayList<>();
+        String query = "SELECT * FROM "+HOADON_TABLE+" WHERE "+COLUMN_TRANGTHAITHANHTOAN+"="+1;
+        Cursor cursor = db.rawQuery(query,null);
+        if(cursor.moveToFirst())
+        {
+            do{
+                idhd = cursor.getInt(0);
+                idtk = cursor.getString(1);
+                idban = cursor.getInt(2);
+                tgvao = cursor.getString(3);
+                tgra = cursor.getString(4);
+                tienthanhtoan = cursor.getInt(5);
+                arrayListHoaDon.add(new Hoadon(idhd,idtk,idban,tgvao,tgra,tienthanhtoan,true));
+            }while (cursor.moveToNext());
+        }
+
+        return  arrayListHoaDon;
     }
     public ArrayList<Hoadon> layDanhSachHoaDon()
     {

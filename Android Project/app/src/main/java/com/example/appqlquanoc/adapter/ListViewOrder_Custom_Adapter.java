@@ -61,7 +61,7 @@ public class ListViewOrder_Custom_Adapter extends BaseAdapter {
             if(arrayListSP.get(i).getIdMon() == idsp)
             {
                 tensp = arrayListSP.get(i).getTenMon().toString();
-                giasp = arrayListSP.get(position).getGiaMon();
+                giasp = arrayListSP.get(i).getGiaMon();
             }
         }
 

@@ -1,8 +1,9 @@
 package com.example.appqlquanoc.doituong;
 
+import java.io.Serializable;
 import java.sql.Date;
 
-public class Hoadon {
+public class Hoadon implements Serializable {
     private int idhd;
     private String idtk;
     private int idban;

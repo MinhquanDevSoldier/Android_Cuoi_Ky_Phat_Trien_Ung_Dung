@@ -295,12 +295,18 @@ public class activity_manage_food_layout extends AppCompatActivity {
                 }
                 else
                 {
-                    String tensp,giasp;
-                    tensp = edttenmonmanagefood.getText().toString();
-                    giasp = edtgiamanagefood.getText().toString();
-                    int idmax = arrayListproduce.get(arrayListproduce.size()-1).getIdMon();
-                    SanPham sp = new SanPham(idmax+1,iddmAdd,tensp, Integer.parseInt(giasp));
-                    databaseQuanOc = new DatabaseQuanOc(getApplicationContext());
+                    int idmax;
+                    if(arrayListproduce.size()==0)
+                    {
+                        idmax = 0;
+                    }
+                    else
+                    {
+                        idmax = arrayListproduce.get(arrayListproduce.size()-1).getIdMon();
+                    }
+
+                    SanPham sp = new SanPham(idmax+1,iddmAdd,tenmon, Integer.parseInt(gia));
+
                     arrayListproduce.add(sp);
                     adapterproduce.notifyDataSetChanged();
                     boolean check = databaseQuanOc.themSanPham(sp);
@@ -325,6 +331,7 @@ public class activity_manage_food_layout extends AppCompatActivity {
         spdanhmuctp = findViewById(id.spinnerdmtp);
         lvproduce = findViewById(id.lvsanpham);
         btnlocdm = findViewById(id.btnlocdm);
+        databaseQuanOc = new DatabaseQuanOc(this);
     }
     public void getDataProduce()
     {

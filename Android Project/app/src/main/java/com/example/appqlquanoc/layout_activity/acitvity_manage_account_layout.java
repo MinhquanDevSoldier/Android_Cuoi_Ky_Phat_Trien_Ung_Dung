@@ -53,7 +53,23 @@ public class acitvity_manage_account_layout extends AppCompatActivity {
         btnLocChucVu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //moGiaoDienThemTk();
+                String idcv;
+                idcv = spinnerChucVu.getSelectedItemPosition()+"";
+                if(idcv.equals(0+""))
+                {
+                    idcv ="true";
+                }
+                if(idcv.equals(1+""))
+                {
+                    idcv = "1";
+                }
+                if(idcv.equals(2+""))
+                {
+                    idcv = "0";
+                }
+                danhSachTK.clear();
+                danhSachTK.addAll(databaseQuanOc.layDanhSachTaiKhoan(idcv));
+                adapterAccount.notifyDataSetChanged();
             }
         });
     }
@@ -84,7 +100,7 @@ public void xoaTaiKhoan(int idtk)
 
     public void layDanhSachTaiKhoan()
     {
-        danhSachTK = databaseQuanOc.layDanhSachTaiKhoan();
+        danhSachTK = databaseQuanOc.layDanhSachTaiKhoan("true");
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -135,7 +151,7 @@ public void xoaTaiKhoan(int idtk)
         if(requestCode == themtaikhoanrequest && resultCode == themtaikhoanresult && data!=null )
         {
             danhSachTK.clear();
-            danhSachTK.addAll(databaseQuanOc.layDanhSachTaiKhoan());
+            danhSachTK.addAll(databaseQuanOc.layDanhSachTaiKhoan("true"));
             adapterAccount.notifyDataSetChanged();
         }
     }

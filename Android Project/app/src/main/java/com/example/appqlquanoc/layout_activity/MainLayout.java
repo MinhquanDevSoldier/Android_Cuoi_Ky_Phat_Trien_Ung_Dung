@@ -116,7 +116,9 @@ public class MainLayout extends AppCompatActivity {
                 }
                 break;
             case R.id.menuhoadon:
-                Toast.makeText(this, "Mã tài khoản :"+idtk, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Đang tải dữ liệu hóa đơn "+idtk, Toast.LENGTH_SHORT).show();
+                intent = new Intent(getApplicationContext(),manager_bill_layout.class);
+                startActivity(intent);
                 break;
             case R.id.menutaikhoan:
                 intent = new Intent(getApplicationContext(), account_preview.class);
@@ -131,6 +133,8 @@ public class MainLayout extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
     public void databasetable()
     {
         //Add data to listkhuvuc
@@ -194,6 +198,9 @@ public class MainLayout extends AppCompatActivity {
     }
     public void loadban()
     {
+        listkhuvuc.clear();
+        listkhuvuc.addAll(databaseQuanOc.layDanhSachKhuVuc());
+        arrayAdapter.notifyDataSetChanged();
         listbanan.clear();
         listbanan = databaseQuanOc.layDanhSachBan(listkhuvuc.get(sppositon).getIdkv());
         adapter = new ViewPagerSelectTable(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT,listkhuvuc.get(sppositon).getIdkv(),listbanan);

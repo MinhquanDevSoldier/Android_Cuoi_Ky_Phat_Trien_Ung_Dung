@@ -10,18 +10,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppQLQuanOc">
-        <activity android:name=".modifydatabase">
-
-        </activity>
-        <activity android:name=".layout_activity.activity_manage_area">
-
-        </activity>
+        <activity android:name=".layout_activity.info_bill_layout"></activity>
+        <activity android:name=".layout_activity.manager_bill_layout" />
+        <activity android:name=".modifydatabase" />
+        <activity android:name=".layout_activity.activity_manage_area" />
         <activity
             android:name=".adapter.ListViewAccount_Custom_Adapter"
             tools:ignore="Instantiatable" />
         <activity
             android:name=".layout_activity.activity_them_tai_khoan"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"></activity>
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity android:name=".layout_activity.account_preview" />
         <activity android:name=".layout_activity.dialog_add_managefood" />
         <activity
@@ -33,11 +31,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".layout_activity.acitvity_manage_account_layout"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".layout_activity.activity_manage_table"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait" />
         <activity android:name=".layout_activity.activity_manage_food_layout" />
         <activity
             android:name=".layout_activity.activity_login_layout"
@@ -45,6 +42,7 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

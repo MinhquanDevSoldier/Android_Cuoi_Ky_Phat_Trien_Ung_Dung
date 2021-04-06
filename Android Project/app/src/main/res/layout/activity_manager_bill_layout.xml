@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10"
+    tools:context=".layout_activity.manager_bill_layout">
+    <ScrollView
+        android:layout_weight="4.5"
+        android:padding="10dp"
+        android:fillViewport="true"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ListView
+                android:background="#E4E4E4"
+                android:id="@+id/lvDanhSachHoaDon"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+    </ScrollView>
+    <LinearLayout
+        android:weightSum="10"
+        android:layout_weight="5.5"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:weightSum="10">
+            <TextView
+                android:text="Thời gian bắt đầu :"
+                android:textSize="25sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/edtDATEIN"
+                android:hint="Chạm để chọn ngày"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edt_dang_nhap" />
+            <TextView
+                android:id="@+id/edtTIMEIN"
+                android:layout_marginTop="5dp"
+                android:hint="Chạm để chọn giờ"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edt_dang_nhap" />
+            <TextView
+                android:text="Thời gian kết thúc :"
+                android:textSize="25sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/edtDATEOUT"
+                android:hint="Chạm để chọn ngày"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edt_dang_nhap" />
+            <TextView
+                android:id="@+id/edtTIMEOUT"
+                android:layout_marginTop="5dp"
+                android:hint="Chạm để chọn giờ"
+                android:textSize="20sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edt_dang_nhap" />
+            <Button
+                android:layout_marginTop="10dp"
+                android:id="@+id/btnLocHoaDon"
+                android:background="@drawable/btnthemmanagefood"
+                android:layout_width="match_parent"
+                android:textSize="20sp"
+                android:layout_height="wrap_content"
+                android:text="Lọc hóa đơn" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
